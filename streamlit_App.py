@@ -81,7 +81,7 @@ if app_mode=='Home':
 
     fig, ax = plt.subplots()
     sns.histplot(df['thalachh'], kde= True, bins=20, ax=ax)
-    ax.set_title('Maximum Heart Rate Achieved Ditribution of Individuals')
+    ax.set_title('Maximum Heart Rate Achieved Distribution of Individuals')
     ax.set_xlabel('Maximum Heart Rate Achieved')
     ax.set_ylabel('Frequency')
     st.pyplot(fig)
