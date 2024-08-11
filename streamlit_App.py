@@ -19,7 +19,7 @@ if app_mode=='Home':
     st.write("You can here normal heart beat of Healthy person.")
     st.audio('Heartbeat.mp3')
     st.write("")
-    st.subheader("Below diagrams visualize the factots of distribution in the dataset.\n\n")
+    st.subheader("Below diagrams visualize the factors of distribution in the dataset.\n\n")
     df= pd.read_csv("heart.csv")
     
     st.subheader('Distribution of Heart Attack Outcomes')
