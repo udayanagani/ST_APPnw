@@ -7,8 +7,8 @@ import numpy as np
 import pickle
 import time
 
-app_mode = st.sidebar.selectbox('Select Page',[st.image('home.jpeg'),'Home',st.image('pred.jpeg'),'Prediction']) #two pages
-if app_mode=='Home':    
+app_mode = st.sidebar.selectbox('Select Page',['Home','Prediction']) #two pages
+if app_mode==st.image('home.jpeg'),'Home':    
     
     st.title("Welcome Back...")
     st.image('heart.jpeg')
@@ -89,7 +89,7 @@ if app_mode=='Home':
     st.write("")
     st.write("")
     
-elif app_mode == 'Prediction':
+elif app_mode == st.image('pred.jpeg'),'Prediction':
 
 
     loaded_model = pickle.load(open('heart_model.sav', 'rb'))
