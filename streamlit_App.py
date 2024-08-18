@@ -7,7 +7,7 @@ import numpy as np
 import pickle
 import time
 
-app_mode = st.sidebar.selectbox('Select Page',['Home','Prediction']) #two pages
+app_mode = st.sidebar.selectbox('Select Page',[st.image('home.jpeg')'Home',st.image('pred.jpeg')'Prediction']) #two pages
 if app_mode=='Home':    
     
     st.title("Welcome Back...")
