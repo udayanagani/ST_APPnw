@@ -10,4 +10,4 @@ The application features a clean and user-friendly interface, making it accessib
 
 This project is part of a Python tutorial that includes the complete Python code, allowing users to explore the underlying machine learning model and customize it further.
 
-The application is hosted on GitHub, making it easy to access, use, and contribute to.
+The application is hosted on streamlit (https://app-ujrszowbe7xswnxnhdgmuk.streamlit.app/) making it easy to access, use, and contribute to.
