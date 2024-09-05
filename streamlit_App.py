@@ -1,30 +1,37 @@
-import streamlit as st
-import pandas as pd 
-import plotly.express as px 
-import seaborn as sns 
-import matplotlib.pyplot as plt
-import numpy as np
-import pickle
-import time
+# Import necessary libraries
+import streamlit as st # For building the web application
+import pandas as pd # For data handling
+import plotly.express as px # For creating interactive plots
+import seaborn as sns # For creating visualizations
+import matplotlib.pyplot as plt # For plotting graphs
+import numpy as np  # For numerical operations
+import pickle # For loading the pre-trained model
+import time  # For adding times
 
+# Create a sidebar with options(Home, Prediction) for different pages
 app_mode = st.sidebar.selectbox('Select Page',['Home','Prediction']) #two pages
+
+# Home page
 if app_mode=='Home':    
     
     st.title("Welcome Back...")
-    st.image('heart.jpeg')
+    st.image('heart.jpeg') # Display an image 
     st.subheader("Are you know?")
     st.write("According to the World Health Organization (WHO), cardiovascular diseases (CVDs) are the leading cause of death globally, taking an estimated 17.9 million lives each year, which accounts for about 31% of all global deaths. Of these deaths, an estimated 85% are due to heart attacks and strokes. This translates to approximately 24,561 deaths per day from CVDs.")
+    
+    # Display video
     st.video("video.mp4")
     
     st.write("You can here normal heart beat of Healthy person.")
-    st.audio('Heartbeat.mp3')
+    st.audio('Heartbeat.mp3') # display an audio clip
     st.write("")
     st.subheader("Below diagrams visualize the factors of distribution in the dataset.\n\n")
-    df= pd.read_csv("heart.csv")
-    
+    df= pd.read_csv("heart.csv")  # Load the heart attack dataset
+
+    # Plot the distribution of heart attack outcomes
     st.subheader('Distribution of Heart Attack Outcomes')
-    fig, ax = plt.subplots()
-    sns.countplot(x='output', data=df, ax=ax)
+    fig, ax = plt.subplots() 
+    sns.countplot(x='output', data=df, ax=ax) # Count plot for heart attack status
     for patch in ax.patches:
         current_width = patch.get_width()
         diff = current_width - 0.3
@@ -36,20 +43,20 @@ if app_mode=='Home':
     ax.set_xlabel('Heart Attack Status')
     ax.set_ylabel('Number of Individuals')
     ax.set_xticklabels(['No Heart Attack risk', 'Heart Attack'])
-    st.pyplot(fig)
+    st.pyplot(fig) # Display the plot
     st.write("")
     st.write("")
     st.write("")
 
     
-
+    # Plot the distribution of individuals by gender
     gender_counts = df['gender'].value_counts().reset_index()
     gender_counts.columns = ['gender', 'count']
 
     fig = px.pie(gender_counts, values='count', names='gender', title='Gender Distribution of Individuals')
     st.plotly_chart(fig)
     
-    
+    # Plot the distribution of cholesterol levels
     st.subheader('Cholestoral Distribution')
     fig, ax = plt.subplots()
     sns.histplot(df['chol'], kde= True, bins=20, ax=ax)
@@ -62,7 +69,7 @@ if app_mode=='Home':
     st.write("")
     st.write("")
 
-    
+    # Plot the distribution of resting blood pressure
     st.subheader('Resting Blood Pressure Distribution')
     fig, ax = plt.subplots()
     sns.histplot(df['trtbps'], kde= True, bins=20, ax=ax)
@@ -74,13 +81,13 @@ if app_mode=='Home':
     st.write("")
     st.write("")
 
-    
+    # Plot the distribution of maximum heart rate achieved
     st.subheader('Maximum Heart Rate Achieved Distribution')
     st.write('Median Heart Rate(130) Achieved patients')
     st.progress(37)
 
     fig, ax = plt.subplots()
-    sns.histplot(df['thalachh'], kde= True, bins=20, ax=ax)
+    sns.histplot(df['thalachh'], kde= True, bins=20, ax=ax) # Histogram for max heart rate distribution
     ax.set_title('Maximum Heart Rate Achieved Distribution of Individuals')
     ax.set_xlabel('Maximum Heart Rate Achieved')
     ax.set_ylabel('Frequency')
@@ -89,16 +96,19 @@ if app_mode=='Home':
     st.write("")
     st.write("")
     
+# Prediction page
 elif app_mode == 'Prediction':
 
-
+    # Load the pre-trained model
     loaded_model = pickle.load(open('heart_model.sav', 'rb'))
 
+    # Function to make predictions based on user input
     def heart_prediction(input_data):
-        input_data_as_numpy_array = np.asarray(input_data)
-        input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
-        prediction = loaded_model.predict(input_data_reshaped)
+        input_data_as_numpy_array = np.asarray(input_data) # Convert input data to a NumPy array
+        input_data_reshaped = input_data_as_numpy_array.reshape(1, -1) # Reshape input data for prediction
+        prediction = loaded_model.predict(input_data_reshaped) # Make prediction using the loaded model
         print(prediction)
+        # Return the prediction result
         if (prediction[0] == 0):
             return 'The person is not a Heart attack patient'
         else:
@@ -107,6 +117,7 @@ elif app_mode == 'Prediction':
     def main():
         st.title('Heart Attack Risk Prediction Web Application')
 
+         # User inputs for the prediction model
         age = st.text_input('Age')
         sex = st.text_input('Gender(If Male enter=1 / If Female enter=0)')
         #cp = st.text_input('Chest Pain type')
@@ -121,7 +132,7 @@ elif app_mode == 'Prediction':
         st.file_uploader('Upload a photo')
 
         #diagnosis = ''
-        
+         # Button to make predictions
         if st.button('Click to Test Result'):
             with st.spinner('Please wait...'):
                 time.sleep(1)
