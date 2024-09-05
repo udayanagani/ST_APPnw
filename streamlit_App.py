@@ -43,10 +43,10 @@ if app_mode=='Home':
 
     
 
-    age_counts = df['age'].value_counts().reset_index()
-    age_counts.columns = ['age', 'count']
+    gender_counts = df['gender'].value_counts().reset_index()
+    gender_counts.columns = ['gender', 'count']
 
-    fig = px.pie(age_counts, values='count', names='age', title='Age Distribution of Individuals')
+    fig = px.pie(gender_counts, values='count', names='gender', title='Gender Distribution of Individuals')
     st.plotly_chart(fig)
     
     
