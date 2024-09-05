@@ -43,10 +43,10 @@ if app_mode=='Home':
 
     
 
-    age_counts = df['age'].value_counts().reset_index()
-    age_counts.columns = ['age', 'count']
+    gender_counts = df['gender'].value_counts().reset_index()
+    gender_counts.columns = ['gender', 'count']
 
-    fig = px.pie(age_counts, values='count', names='age', title='Age Distribution of Individuals')
+    fig = px.pie(gender_counts, values='count', names='gender', title='Gender Distribution of Individuals')
     st.plotly_chart(fig)
     
     
@@ -105,7 +105,7 @@ elif app_mode == 'Prediction':
             return 'The person is a Heart attack patient'
 
     def main():
-        st.title('Heart Attack Prediction Web Application')
+        st.title('Heart Attack Risk Prediction Web Application')
 
         age = st.text_input('Age')
         sex = st.text_input('Gender(If Male enter=1 / If Female enter=0)')
