@@ -105,7 +105,7 @@ elif app_mode == 'Prediction':
             return 'The person is a Heart attack patient'
 
     def main():
-        st.title('Heart Attack Prediction Web Application')
+        st.title('Heart Attack Risk Prediction Web Application')
 
         age = st.text_input('Age')
         sex = st.text_input('Gender(If Male enter=1 / If Female enter=0)')
