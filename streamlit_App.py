@@ -49,11 +49,11 @@ if app_mode=='Home':
     st.write("")
 
     
-    # Plot the distribution of individuals by gender
-    gender_counts = df['gender'].value_counts().reset_index()
-    gender_counts.columns = ['gender', 'count']
+    # Plot the distribution of individuals by age
+    age_counts = df['age'].value_counts().reset_index()
+    gage_counts.columns = ['age', 'count']
 
-    fig = px.pie(gender_counts, values='count', names='gender', title='Gender Distribution of Individuals')
+    fig = px.pie(age_counts, values='count', names='age', title='Age Distribution of Individuals')
     st.plotly_chart(fig)
     
     # Plot the distribution of cholesterol levels
