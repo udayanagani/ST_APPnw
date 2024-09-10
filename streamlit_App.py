@@ -51,7 +51,7 @@ if app_mode=='Home':
     
     # Plot the distribution of individuals by age
     age_counts = df['age'].value_counts().reset_index()
-    gage_counts.columns = ['age', 'count']
+    age_counts.columns = ['age', 'count']
 
     fig = px.pie(age_counts, values='count', names='age', title='Age Distribution of Individuals')
     st.plotly_chart(fig)
